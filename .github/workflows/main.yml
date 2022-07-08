@@ -1,0 +1,14 @@
+on: [push]
+
+jobs:
+  dry-code-action:
+    runs-on: ubuntu-latest
+    name: Dry Code
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Dry Code Action
+        uses: Pposong-Hantaihe/dry-code@a6ab81aa20c6906f51753e715fa581a126d62073
+        with:
+          options: ''
+          arguments: 'src'
