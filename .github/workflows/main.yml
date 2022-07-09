@@ -1,4 +1,4 @@
-on: [push]
+on: [pull_request]
 
 jobs:
   dry-code-action:
@@ -8,7 +8,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Dry Code Action
-        uses: Pposong-Hantaihe/dry-code@a6ab81aa20c6906f51753e715fa581a126d62073
+        uses: Pposong-Hantaihe/dry-code@620ecde4fe2107e2a741eeda24af905a58c83f25
         with:
           options: ''
           arguments: 'src'
+          Token: "${{ secrets.GITHUB_TOKEN }}"
