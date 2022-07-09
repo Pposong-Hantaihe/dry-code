@@ -25,6 +25,8 @@ async function run() {
           return value.trim();
         }));
     }
+
+    const extension = /(?:\.([^.]+))?$/;
     const blocks = cloneFound[0].split(" ").map((value) => {
       if(extension.exec(value)[1]){
         return '`' + value + '`';
