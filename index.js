@@ -25,8 +25,12 @@ async function run() {
           return value.trim();
         }));
     }
-
-    const blocks = cloneFound[0];
+    const blocks = cloneFound[0].split(" ").map((value) => {
+      if(extension.exec(value)[1]){
+        return '`' + value + '`';
+      }
+      return value
+    }).join(' ')
     const graph = "Graph:\n\n"
     const body = blocks + graph + Formats; // Formats => graph_url;
 
