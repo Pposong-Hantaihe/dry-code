@@ -9,6 +9,9 @@ inputs:
     description: 'path to source'
     required: true
     default: '.'
+  Token:
+    description: 'user token'
+    required: true
 runs:
   using: 'node16'
   main: 'index.js'
