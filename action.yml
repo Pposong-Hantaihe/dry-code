@@ -3,11 +3,9 @@ description: 'Copy/paste detecting GitHub Action for programming source code (js
 inputs:
   options:
     description: 'options for jscpd'
-    required: true
     default: ''
   arguments:
-    description: 'path to source'
-    required: true
+    description: 'path to code'
     default: '.'
   Token:
     description: 'user token'
