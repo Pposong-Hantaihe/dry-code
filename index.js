@@ -2,6 +2,8 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const { execSync } = require("child_process");
 
+const chart = require('./utils/chart.js');
+
 function exec(command){
   return execSync(command, {encoding: 'utf8'}).trim();
 }
@@ -34,7 +36,24 @@ async function run() {
       return value
     }).join(' ')
     const graph = "Graph:\n\n"
-    const body = blocks + graph + Formats; // Formats => graph_url;
+
+    const duplicatedLinesObject = Object.fromEntries(
+      new Map(Formats.map(row => [
+        row[0], parseInt(row[5])
+      ]))
+    );
+
+    const duplicatedLinesChart = chart(duplicatedLinesObject);
+
+    const duplicatedTokensObject = Object.fromEntries(
+      new Map(Formats.map(row => [
+        row[0], parseInt(row[6])
+      ]))
+    );
+
+    const duplicatedTokensChart = chart(duplicatedTokensObject);
+
+    const body = blocks + graph + duplicatedLinesChart + duplicatedTokensChart; // Formats => graph_url;
 
     const octokit = github.getOctokit(token);
     await octokit.rest.issues.createComment({
