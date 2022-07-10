@@ -43,7 +43,7 @@ async function run() {
       ]))
     );
 
-    const duplicatedLinesChart = createBarchart(duplicatedLinesObject);
+    const duplicatedLinesChart = createBarChart(duplicatedLinesObject);
 
     const duplicatedTokensObject = Object.fromEntries(
       new Map(Formats.map(row => [
@@ -51,7 +51,7 @@ async function run() {
       ]))
     );
 
-    const duplicatedTokensChart = createBarchart(duplicatedTokensObject);
+    const duplicatedTokensChart = createBarChart(duplicatedTokensObject);
 
     const body = blocks + graph + duplicatedLinesChart + duplicatedTokensChart; // Formats => graph_url;
 
