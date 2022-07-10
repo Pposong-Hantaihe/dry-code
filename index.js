@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const { execSync } = require("child_process");
 
-const chart = require('./utils/chart.js');
+const createBarChart = require('./utils/chart.js');
 
 function exec(command){
   return execSync(command, {encoding: 'utf8'}).trim();
@@ -43,7 +43,7 @@ async function run() {
       ]))
     );
 
-    const duplicatedLinesChart = chart(duplicatedLinesObject);
+    const duplicatedLinesChart = createBarchart(duplicatedLinesObject);
 
     const duplicatedTokensObject = Object.fromEntries(
       new Map(Formats.map(row => [
@@ -51,7 +51,7 @@ async function run() {
       ]))
     );
 
-    const duplicatedTokensChart = chart(duplicatedTokensObject);
+    const duplicatedTokensChart = createBarchart(duplicatedTokensObject);
 
     const body = blocks + graph + duplicatedLinesChart + duplicatedTokensChart; // Formats => graph_url;
 
