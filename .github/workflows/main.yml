@@ -3,13 +3,12 @@ on: [pull_request]
 jobs:
   dry-code-action:
     runs-on: ubuntu-latest
-    name: Dry Code
+    name: Dry Code Action
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Dry Code Action
-        uses: Pposong-Hantaihe/dry-code@7ec8dba2de93dbaf770da2cc8d0442dd733618f4
+        uses: Pposong-Hantaihe/dry-code@v1.0.2
         with:
-          options: ''
           arguments: 'src'
-          Token: "${{ secrets.GITHUB_TOKEN }}"
+          token: "${{ secrets.GITHUB_TOKEN }}"
