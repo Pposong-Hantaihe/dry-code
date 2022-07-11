@@ -3,8 +3,9 @@ const parseJscpd = (output) => {
 };
 
 const parseChart = (result) => {
-    console.log("start parseChart");
+    console.log(result);
     const chart = result.split("│");
+    console.log(chart);
     let elements = [];
     for (let i = 0; i < chart.length; i++){
         if(chart[i++] === "\n├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤\n") {
