@@ -19,9 +19,17 @@ const run = async () => {
     const octokit = github.getOctokit(token);
   
     const output = exec(`npx jscpd ${options} ${arguments} | sed 's/\x1b\[[0-9;]*m//g'`);
-    console.log(output);
+    if(output.split(/\r\n|\r|\n/).length === 1){
+      await octokit.rest.issues.createComment({
+        ...context.repo,
+        issue_number: pull_request.number,
+        body: "dry-code-action: **No Clone Found**"
+      });
+      return;
+    }
+
     const result = parseJscpd(output);
-  
+    
     const extension = /(?:\.([^.]+))?$/;
     const files = result[0].split(" ").map((element) => {
       if(extension.exec(element)[1]){
