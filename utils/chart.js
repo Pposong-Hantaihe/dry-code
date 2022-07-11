@@ -19,8 +19,9 @@ const chart = (data, showValue = true, maxBarLength = 30) => {
     const barText = bar(item.value, maxValue, maxBarLength);
     const suffix = showValue ? ` ${item.value}` : "";
     return "|" + prefix + "|" + barText + suffix + "|";
-  }).splice(1, 0, "|-|-|").join('\n');
-  return resultChart;
+  });
+  resultChart.splice(1,0,"|-|-|");
+  return resultChart.join("\n");
 }
 
 module.exports = chart;
