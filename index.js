@@ -2,39 +2,35 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const { execSync } = require("child_process");
 
+const { parseJscpd, parseChart } = require('./utils/parse.js');
 const createBarChart = require('./utils/chart.js');
 
-function exec(command){
+const exec = (command) => {
   return execSync(command, {encoding: 'utf8'}).trim();
 }
 
-async function run() {
+const run = async () => {
   try {
     const option = core.getInput('option');
     const argument = core.getInput('argument');
     const token = core.getInput('Token');
     const context = github.context;
     const { pull_request } = context.payload;
+    const octokit = github.getOctokit(token);
   
-    const result = exec(`npx jscpd ${option} ${argument} | sed 's/\x1b\[[0-9;]*m//g'`);
-    const cloneFound = result.split("┌────────────┬────────────────┬─────────────┬──────────────┬──────────────┬──────────────────┬───────────────────┐\n");
+    const output = exec(`npx jscpd ${option} ${argument} | sed 's/\x1b\[[0-9;]*m//g'`);
+    const result = parseJscpd(output);
   
-    const chart = cloneFound[1].split("│");
-    let Formats = [];
-    for (let i = 0; i < chart.length; i++){
-      if(chart[i++] === "\n├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤\n")
-        Formats.push(chart.slice(i, i+7).map((value) => {
-          return value.trim();
-        }));
-    }
-
     const extension = /(?:\.([^.]+))?$/;
-    const blocks = cloneFound[0].split(" ").map((value) => {
-      if(extension.exec(value)[1]){
-        return '`' + value + '`';
+    const files = result[0].split(" ").map((element) => {
+      if(extension.exec(element)[1]){
+        return `\`${element}\``;
       }
-      return value
-    }).join(' ')
+      return element;
+    }).join(' ');
+
+    const Formats = parseChart(result[1]);
+
     const graph = "Graph:\n\n"
 
     const duplicatedLinesObject = Object.fromEntries(
@@ -53,9 +49,8 @@ async function run() {
 
     const duplicatedTokensChart = createBarChart(duplicatedTokensObject);
 
-    const body = blocks + graph + duplicatedLinesChart + duplicatedTokensChart; // Formats => graph_url;
+    const body = files + graph + duplicatedLinesChart + duplicatedTokensChart;
 
-    const octokit = github.getOctokit(token);
     await octokit.rest.issues.createComment({
       ...context.repo,
       issue_number: pull_request.number,
