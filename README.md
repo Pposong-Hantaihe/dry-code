@@ -30,7 +30,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Dry Code Action
-        uses: Pposong-Hantaihe/dry-code@v1.0.1
+        uses: Pposong-Hantaihe/dry-code@v1.0.2
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
 ```
