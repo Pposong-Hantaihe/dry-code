@@ -11,6 +11,10 @@ const bar = (value, maxValue, maxBarLength) => {
 
 const chart = (data, showValue = true, maxBarLength = 30) => {
   const formatted = Object.keys(data).map(key => ({ key: key, value: data[key] }));
+  const object_total = formatted.find(object => object.key === "Total:");
+  formatted.splice(formatted.indexOf(object_total), 1);
+  formatted.splice(0, 0, object_total);
+  
   const sorted = formatted.sort((a, b) => b.value - a.value);
   const maxValue = Math.max(...sorted.map(item => item.value));
   const maxKeyNameLength = Math.max(...sorted.map(item => item.key.length));
