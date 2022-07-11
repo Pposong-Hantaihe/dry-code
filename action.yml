@@ -1,0 +1,15 @@
+name: 'dry-code'
+description: 'Copy/paste detecting GitHub Action for programming source code (jscpd)'
+inputs:
+  options:
+    description: 'options for jscpd'
+    default: ''
+  arguments:
+    description: 'path to code'
+    default: '.'
+  Token:
+    description: 'user token'
+    required: true
+runs:
+  using: 'node16'
+  main: 'index.js'
