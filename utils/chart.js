@@ -9,7 +9,7 @@ const bar = (value, maxValue, maxBarLength) => {
   return bar;
 }
 
-const chart = (data, showValue = false, maxBarLength = 100) => {
+const chart = (data, showValue = false, maxBarLength = 30) => {
   const formatted = Object.keys(data).map(key => ({ key: key, value: data[key] }));
   const sorted = formatted.sort((a, b) => b.value - a.value);
   const maxValue = Math.max(...sorted.map(item => item.value));

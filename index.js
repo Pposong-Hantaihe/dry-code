@@ -49,7 +49,9 @@ const run = async () => {
 
     const duplicatedTokensChart = createBarChart(duplicatedTokensObject);
 
-    const body = files + graph + duplicatedLinesChart + duplicatedTokensChart;
+    const barCharts = "Duplicated Lines\n\n" + duplicatedLinesChart + "\n\nDuplicated Tokens\n\n" + duplicatedTokensChart
+
+    const body = files + barCharts;
 
     await octokit.rest.issues.createComment({
       ...context.repo,
