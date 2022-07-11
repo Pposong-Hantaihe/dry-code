@@ -1,0 +1,15 @@
+on: [pull_request]
+
+jobs:
+  dry-code-action:
+    runs-on: ubuntu-latest
+    name: Dry Code
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Dry Code Action
+        uses: Pposong-Hantaihe/dry-code@v1.0.0
+        with:
+          options: ''
+          arguments: 'src'
+          Token: "${{ secrets.GITHUB_TOKEN }}"
