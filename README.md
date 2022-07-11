@@ -17,7 +17,7 @@ Copy/paste detecting GitHub Action for programming source code with [jscpd](http
 
 > ![image](https://user-images.githubusercontent.com/46441280/178265989-0a8d914a-a612-4fad-ac1f-11eda76887b9.png)
 
-## Example YAML snippents
+## Example YAML snippets
 
 ```yaml
 on: [pull_request]
