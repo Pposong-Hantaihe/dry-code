@@ -8,7 +8,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Dry Code Action
-        uses: Pposong-Hantaihe/dry-code@0d6fc60857e14499722d22aa1f963d740dfed196
+        uses: Pposong-Hantaihe/dry-code@827b113a11b5fccb930d7a89a2af5232f4552aae
         with:
           arguments: 'src'
           token: "${{ secrets.GITHUB_TOKEN }}"
