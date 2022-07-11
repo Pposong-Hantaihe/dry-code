@@ -1,4 +1,4 @@
-name: 'dry-code'
+name: 'dry-code-action'
 description: 'Copy/paste detecting GitHub Action for programming source code (jscpd)'
 inputs:
   options:
