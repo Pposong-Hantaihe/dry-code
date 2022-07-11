@@ -11,14 +11,15 @@ const exec = (command) => {
 
 const run = async () => {
   try {
-    const option = core.getInput('option');
-    const argument = core.getInput('argument');
-    const token = core.getInput('Token');
+    const options = core.getInput('options');
+    const arguments = core.getInput('arguments');
+    const token = core.getInput('token');
     const context = github.context;
     const { pull_request } = context.payload;
     const octokit = github.getOctokit(token);
   
     const output = exec(`npx jscpd ${option} ${argument} | sed 's/\x1b\[[0-9;]*m//g'`);
+    console.log(output);
     const result = parseJscpd(output);
   
     const extension = /(?:\.([^.]+))?$/;
