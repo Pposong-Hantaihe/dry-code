@@ -25,16 +25,14 @@ on: [pull_request]
 jobs:
   dry-code-action:
     runs-on: ubuntu-latest
-    name: Dry Code
+    name: Dry Code Action
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Dry Code Action
         uses: Pposong-Hantaihe/dry-code@v1.0.1
         with:
-          options: ''
-          arguments: 'src/'
-          Token: "${{ secrets.GITHUB_TOKEN }}"
+          token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
 ## Contributors
