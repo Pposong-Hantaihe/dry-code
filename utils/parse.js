@@ -1,23 +1,22 @@
-const parseJscpd = (output) => {
-    console.log(output);
-    return output.split("┌────────────┬────────────────┬─────────────┬──────────────┬──────────────┬──────────────────┬───────────────────┐\n");
+const parseFile = (output) => {
+    return output.split("┌");
 };
 
-const parseChart = (result) => {
-    console.log(result);
+const parseChart = (output) => {
+    return output.split("┐\n");
+};
+
+const parseFormats = (result) => {
     const chart = result.split("│");
-    console.log(chart);
     let elements = [];
     for (let i = 0; i < chart.length; i++){
-        if(chart[i++] === "\n├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤\n") {
+        if(chart[i++].includes("\n├")) {
             elements.push(chart.slice(i, i+7).map((value) => { 
                 return value.trim(); 
             }));
         }
     }
-    console.log("=========elements==========");
-    console.log(elements);
     return elements;
 };
 
-module.exports = { parseJscpd, parseChart };
+module.exports = { parseFile, parseChart, parseFormats };

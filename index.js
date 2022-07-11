@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const { execSync } = require("child_process");
 
-const { parseJscpd, parseChart } = require('./utils/parse.js');
+const { parseFile, parseChart, parseFormats } = require('./utils/parse.js');
 const createBarChart = require('./utils/chart.js');
 
 const exec = (command) => {
@@ -28,9 +28,7 @@ const run = async () => {
       return;
     }
 
-    const result = parseJscpd(output);
-    
-    console.log("Start");
+    const result = parseFile(output);
     const extension = /(?:\.([^.]+))?$/;
     const files = result[0].split(" ").map((element) => {
       if(extension.exec(element)[1]){
@@ -39,8 +37,8 @@ const run = async () => {
       return element;
     }).join(' ');
 
-    console.log("start parseChart", result.length, result[1]);
-    const Formats = parseChart(result[1]);
+    const chart = parseChart(result[1])
+    const Formats = parseFormats(chart[1]);
 
     const duplicatedLinesObject = Object.fromEntries(
       new Map(Formats.map(row => [
