@@ -8,7 +8,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Dry Code Action
-        uses: Pposong-Hantaihe/dry-code@7bb45c03ffedeaa9941c9d2a72f998b8f6bd8a13
+        uses: Pposong-Hantaihe/dry-code@9209086886f5ea25825ca4aefa1bfa1b889c50a9
         with:
           options: ''
           arguments: 'src'
