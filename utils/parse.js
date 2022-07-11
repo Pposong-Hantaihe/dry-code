@@ -3,6 +3,7 @@ const parseJscpd = (output) => {
 };
 
 const parseChart = (result) => {
+    console.log("start parseChart");
     const chart = result.split("│");
     let elements = [];
     for (let i = 0; i < chart.length; i++){
