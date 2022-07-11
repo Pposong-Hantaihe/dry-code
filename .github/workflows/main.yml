@@ -10,6 +10,5 @@ jobs:
       - name: Dry Code Action
         uses: Pposong-Hantaihe/dry-code@6e304090d89a1f69ee03dea68c049d66aabad258
         with:
-          options: ''
           arguments: 'src'
-          Token: "${{ secrets.GITHUB_TOKEN }}"
+          token: "${{ secrets.GITHUB_TOKEN }}"
