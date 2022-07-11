@@ -19,6 +19,8 @@ const run = async () => {
     const octokit = github.getOctokit(token);
   
     const output = exec(`npx jscpd ${options} ${arguments} | sed 's/\x1b\[[0-9;]*m//g'`);
+    console.log("=========output==========");
+    console.log(output);
     if(output.split(/\r\n|\r|\n/).length === 1){
       await octokit.rest.issues.createComment({
         ...context.repo,
@@ -29,6 +31,8 @@ const run = async () => {
     }
 
     const result = parseJscpd(output);
+    console.log("=========result==========");
+    console.log(result);
     
     const extension = /(?:\.([^.]+))?$/;
     const files = result[0].split(" ").map((element) => {

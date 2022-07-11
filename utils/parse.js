@@ -12,6 +12,8 @@ const parseChart = (result) => {
             }));
         }
     }
+    console.log("=========elements==========");
+    console.log(elements);
     return elements;
 };
 
