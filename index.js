@@ -39,7 +39,7 @@ const run = async () => {
       return element;
     }).join(' ');
 
-    console.log("start parseChart");
+    console.log("start parseChart", result.length, result[1]);
     const Formats = parseChart(result[1]);
 
     const duplicatedLinesObject = Object.fromEntries(
